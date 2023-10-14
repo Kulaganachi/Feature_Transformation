@@ -1,7 +1,7 @@
 # Feature_Transformation
 ## Ex-06-Feature-Transformation
 ## AIM
-To read the given data and perform Feature Transformation process and save the data to a file.
+To read the given data and perform Feature Transformation process and save the data to a file. 
 
 ## EXPLANATION
 Feature Transformation is a technique by which we can boost our model performance. Feature transformation is a mathematical transformation in which we apply a mathematical formula to a particular column(feature) and transform the values which are useful for our further analysis.
