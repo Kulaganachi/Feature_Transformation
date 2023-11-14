@@ -1,28 +1,25 @@
 
-# Ex-06-Feature-Transformation
-## AIM
-To read the given data and perform Feature Transformation process and save the data to a file. 
+# Ex:06 Feature Transformation
+# AIM
+To read the given data and perform Feature Transformation process and save the data to a file.
 
-## EXPLANATION
+# EXPLANATION
 Feature Transformation is a technique by which we can boost our model performance. Feature transformation is a mathematical transformation in which we apply a mathematical formula to a particular column(feature) and transform the values which are useful for our further analysis.
 
-## ALGORITHM
-### STEP 1:
+# ALGORITHM
+STEP 1:
 Read the given Data
 
-### STEP 2:
+STEP 2:
 Clean the Data Set using Data Cleaning Process
 
-### STEP 3:
+STEP 3:
 Apply Feature Transformation techniques to all the features of the data set
 
-### STEP 4:
+STEP 4:
 Print the transformed features
 
-## PROGRAM:
- NAME:Kulaganachi
- 
- REG NO: 212221040086
+# PROGRAM:
 ```
 import numpy as np
 import pandas as pd
@@ -30,89 +27,92 @@ import matplotlib.pyplot as plt
 import statsmodels.api as sm
 import scipy.stats as stats
 from sklearn.preprocessing import QuantileTransformer
-
-df=pd.read_csv("data_trans.csv")
+df=pd.read_csv("Data_to_Transform.csv")
 df
-
-sm.qqplot(df.HighlyPositiveSkew,fit=True,line='45')
-plt.show()
-
-sm.qqplot(df.HighlyNegativeSkew,fit=True,line='45')
-plt.show()
-
-sm.qqplot(df.ModeratePositiveSkew,fit=True,line='45')
-plt.show()
-
-sm.qqplot(df.ModerateNegativeSkew,fit=True,line='45')
-plt.show()
-
-df['HighlyPositiveSkew']=np.log(df.HighlyPositiveSkew)
-sm.qqplot(df.HighlyPositiveSkew,fit=True,line='45')
-plt.show()
-
-df['HighlyNegativeSkew']=np.log(df.HighlyNegativeSkew)
-sm.qqplot(df.HighlyPositiveSkew,fit=True,line='45')
-plt.show()
-
-df['ModeratePositiveSkew_1'], parameters=stats.yeojohnson(df.ModeratePositiveSkew)
-sm.qqplot(df.ModeratePositiveSkew_1,fit=True,line='45')
-plt.show()
-
-df['ModerateNegativeSkew_1'], parameters=stats.yeojohnson(df.ModerateNegativeSkew)
-sm.qqplot(df.ModerateNegativeSkew_1,fit=True,line='45')
-plt.show()
-
-from sklearn.preprocessing import PowerTransformer
-transformer=PowerTransformer("yeo-johnson")
-df['ModerateNegativeSkew_2']=pd.DataFrame(transformer.fit_transform(df[['ModerateNegativeSkew']]))
-sm.qqplot(df.ModerateNegativeSkew_2,fit=True,line='45')
-plt.show()
-
-from sklearn.preprocessing import QuantileTransformer
-qt= QuantileTransformer(output_distribution = 'normal')
-df['ModerateNegativeSkew_2']=pd.DataFrame(qt.fit_transform(df[['ModerateNegativeSkew']]))
-
-sm.qqplot(df.ModerateNegativeSkew_2,fit=True,line='45')
-plt.show()
-
-df2=df.copy()
-
-df2['HighlyPositiveSkew']= 1/df2.HighlyPositiveSkew
-sm.qqplot(df2.HighlyPositiveSkew,fit=True,line='45')
-
+```
+![image](https://github.com/Vaish-1011/ODD2023-Datascience-Ex06/assets/135130074/08d911ef-4aea-4c85-8d4f-52d7bea02c5b)
+```
+df.head()
+```
+![image](https://github.com/Vaish-1011/ODD2023-Datascience-Ex06/assets/135130074/e0970cd7-b5e6-4d73-8a9b-ef07272171cc)
+```
+df.isnull().sum()
+```
+![image](https://github.com/Vaish-1011/ODD2023-Datascience-Ex06/assets/135130074/d4eb8f58-654b-4475-b1f2-135569999923)
+```
+df.info()
+```
+![image](https://github.com/Vaish-1011/ODD2023-Datascience-Ex06/assets/135130074/73c92dc1-5cb4-4750-8a7c-a5337ddcfe5d)
+```
+df.describe()
+```
+![image](https://github.com/Vaish-1011/ODD2023-Datascience-Ex06/assets/135130074/b75e862c-3259-4926-b0ab-aaa91fd440ff)
+```
+df1 = df.copy()
+sm.qqplot(df1['Highly Positive Skew'],fit=True,line='45')
 plt.show()
 ```
-## OUTPUT:
-![image](https://github.com/Kulaganachi/Feature_Transformation/assets/133641126/2b72f684-63ad-41dc-8b8c-fc1d9b0a6763)
+![image](https://github.com/Vaish-1011/ODD2023-Datascience-Ex06/assets/135130074/488ed508-f76a-41f2-83c7-5e828c6a8a15)
+```
+sm.qqplot(df1['Highly Negative Skew'],fit=True,line='45')
+plt.show()
+```
+![image](https://github.com/Vaish-1011/ODD2023-Datascience-Ex06/assets/135130074/cee10d2e-f7e7-4942-b41d-cfd572c39ac7)
+```
+sm.qqplot(df1['Moderate Positive Skew'],fit=True,line='45')
+plt.show()
+```
+![image](https://github.com/Vaish-1011/ODD2023-Datascience-Ex06/assets/135130074/551c2a1c-ee54-4f6e-ac71-c2901253139b)
+```
+sm.qqplot(df1['Moderate Negative Skew'],fit=True,line='45')
+plt.show()
+```
+![image](https://github.com/Vaish-1011/ODD2023-Datascience-Ex06/assets/135130074/529b129a-2f1d-4bfc-95e0-547e2c6cd5f8)
+```
+df1['Highly Positive Skew'] = np.log(df1['Highly Positive Skew'])
+sm.qqplot(df1['Highly Positive Skew'],fit=True,line='45')
+plt.show()
+```
+![image](https://github.com/Vaish-1011/ODD2023-Datascience-Ex06/assets/135130074/585e4d18-5ccb-43a0-a535-a1a1b00fdaac)
+```
+df2 = df.copy()
+df2['Highly Positive Skew'] = 1/df2['Highly Positive Skew']
+sm.qqplot(df2['Highly Positive Skew'],fit=True,line='45')
+plt.show()
+```
+![image](https://github.com/Vaish-1011/ODD2023-Datascience-Ex06/assets/135130074/40636df8-3c91-411a-8110-e0c137312b8c)
+```
+df3 = df.copy()
+df3['Highly Positive Skew'] = df3['Highly Positive Skew']**(1/1.2)
+sm.qqplot(df2['Highly Positive Skew'],fit=True,line='45')
+plt.show()
+```
+![image](https://github.com/Vaish-1011/ODD2023-Datascience-Ex06/assets/135130074/260e488e-abd6-4179-9f6c-b1651d51c9d4)
+```
+df4 = df.copy()
+df4['Moderate Positive Skew_1'],parameters =stats.yeojohnson(df4['Moderate Positive Skew'])
+sm.qqplot(df4['Moderate Positive Skew_1'],fit=True,line='45')
+plt.show()
+```
+![image](https://github.com/Vaish-1011/ODD2023-Datascience-Ex06/assets/135130074/a4a3fdde-b58b-49b7-9d7c-8ea209417a50)
+```
+from sklearn.preprocessing import PowerTransformer
+trans = PowerTransformer("yeo-johnson")
+df5 = df.copy()
+df5['Moderate Negative Skew_1'] = pd.DataFrame(trans.fit_transform(df5[['Moderate Negative Skew']]))
+sm.qqplot(df5['Moderate Negative Skew_1'],line='45')
+plt.show()
+```
+![image](https://github.com/Vaish-1011/ODD2023-Datascience-Ex06/assets/135130074/ecb849d2-0157-48fb-8014-dfb253ae6b16)
+```
+from sklearn.preprocessing import QuantileTransformer
+qt = QuantileTransformer(output_distribution = 'normal')
+df5['Moderate Negative Skew_2'] = pd.DataFrame(qt.fit_transform(df5[['Moderate Negative Skew']]))
+sm.qqplot(df5['Moderate Negative Skew_2'],line='45')
+plt.show()
+```
+![image](https://github.com/Vaish-1011/ODD2023-Datascience-Ex06/assets/135130074/95f2ccb6-61ef-4d18-be76-2e9e8315a75f)
 
 
-![image](https://github.com/Kulaganachi/Feature_Transformation/assets/133641126/25c638fa-6432-4c89-9d74-786a425b5b7a)
-
-
-![image](https://github.com/Kulaganachi/Feature_Transformation/assets/133641126/d376935e-7111-437b-b417-1c18e969773f)
-
-
-![image](https://github.com/Kulaganachi/Feature_Transformation/assets/133641126/c0c1215f-c14a-469b-b442-f7077c0849cf)
-
-
-![image](https://github.com/Kulaganachi/Feature_Transformation/assets/133641126/2f479624-1c3e-4c58-8aa3-46b95d96a0e5)
-
-
-![image](https://github.com/Kulaganachi/Feature_Transformation/assets/133641126/18c1ca12-b58f-421c-9e1e-b17fd5636dad)
-
-
-![image](https://github.com/Kulaganachi/Feature_Transformation/assets/133641126/4ebb9d04-4152-4476-929e-e935aa9fb257)
-
-
-![image](https://github.com/Kulaganachi/Feature_Transformation/assets/133641126/5bc0e1cd-148b-413b-b300-c201a1c371be)
-
-
-![image](https://github.com/Kulaganachi/Feature_Transformation/assets/133641126/f09f3490-9dac-4a86-a686-5a2f206a14e9)
-
-
-![image](https://github.com/Kulaganachi/Feature_Transformation/assets/133641126/96f7f95e-80b7-47ac-82fe-b944bad7ea40)
-
-
-## RESULT:
-Thus feature transformation is done for the given dataset.
-
+# RESULT:
+Thus feature transformation is done for the given set.
